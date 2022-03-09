@@ -1,0 +1,8 @@
+initial: Hello there! How can I help you?
+initial: Hi! What seems to be the problem?
+final: Thank you for the lovely chat.
+final: Thank you! See you next  time!
+quit: bye
+quit: goodbye
+quit: quit
+quit: q
