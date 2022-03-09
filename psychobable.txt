@@ -1,0 +1,5 @@
+[
+    [r'What time(.*)\?',
+    ["The current time is: {0} in {1}",
+    ]]
+]
