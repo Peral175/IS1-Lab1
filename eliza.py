@@ -2,6 +2,8 @@ import re
 import random
 from datetime import datetime
 
+CHATLOG = "chatLog"
+
 class Eliza:
     def __init__(self):
         self.initials = []
@@ -34,26 +36,37 @@ class Eliza:
         output = text
         return output
 
+    def logChat(self, filePath, line, actor):
+        with open(filePath, 'a') as file:
+            file.write('\n'+actor+'\t'+line)
+            file.close()
+
     def run(self):
-        print(self.randInitial())
+        initial = self.randInitial()
+        file = open(CHATLOG, 'w')
+        file.write('Bot: \t' + initial) # Erase content from previous chat?
+        file.close()       
+        print(initial)
         while True:
             sent = input('> ')
+            self.logChat(CHATLOG,sent,'Human: ')
             output = self.respond(sent)
             if output is None:
                 break
             print(output)
-        print(self.randFinal())
-
-        # chat log
+            self.logChat(CHATLOG,output, 'Bot: ')
+        final = self.randFinal()
+        print(final) 
+        self.logChat(CHATLOG,final, 'Bot: ')
 
 def getTime():
     now = datetime.now()
-    current_time = now.strftime("%H:%M:%S")
+    current_time = now.strftime('%H:%M:%S')
     return current_time
 
 psychobable = [
     [r'What time(.*)\?',
-    ["The current time is: {0} in {1}",
+    ['The current time is: {0} in {1}',
     ]]
 ]
 
