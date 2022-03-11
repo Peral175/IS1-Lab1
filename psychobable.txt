@@ -1,5 +1,27 @@
 [
     [r'What time(.*)\?',
-    ["The current time is: {0} in {1}",
-    ]]
+     ["The current time is: {0} in {1}",
+     ]
+    ],
+
+    [r'(.*) alarm (.*),
+     [
+        "Setting an alarm for ...",  // isDigit() to extract time from sentence?
+        "Alarm set for ...",
+        "..."
+     ]
+    ],
+
+    [r'(.*) time in (.*),
+     [
+        "The time"
+     ]
+    ],
+
+    // default values
+    [r'(.*)',
+     [
+
+     ]
+    ]
 ]
