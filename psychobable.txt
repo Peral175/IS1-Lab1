@@ -1,16 +1,25 @@
 [
-    [r'What time(.*)\?',
-     ["The current time is: {0} in {1}",
+    [r'What time is it ?',
+     ["The current time is: {time}",
      ]
     ],
-
-    [r'(.*) alarm (.*),
+   [r'What time is it in (.*)?',
+     ["The current time in {location} is: {time}",
+     ]
+    ],
+    [r'Put a (.*) alarm!',
      [
-        "Setting an alarm for ...",  // isDigit() to extract time from sentence?
+        "Setting an {timer} alarm.",  // isDigit() to extract time from sentence?
         "Alarm set for ...",
         "..."
      ]
     ],
+
+   [r'Tell me what time it is in Barcelona,
+     [
+        "The time"
+     ]
+   ],
 
     [r'(.*) time in (.*),
      [
@@ -21,7 +30,8 @@
     // default values
     [r'(.*)',
      [
-
+      "The current Time is {0},
      ]
     ]
 ]
+

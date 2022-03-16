@@ -1,6 +1,6 @@
-import re
-import random
+import re, csv, random
 from datetime import datetime
+
 
 CHATLOG = "chatLog.txt"             # file name for chat log
 
@@ -38,8 +38,38 @@ class Eliza:
         output = None
         if text.lower() in self.quits: # to quit 
             return output
-        output = text
+        output = self.analyze(text)
         return output
+
+    def getUTCTime(self, zone):
+        with open("timeZone.csv",'r',newline='\n') as csvfile:
+            reader = csv.reader(csvfile)
+            utcDelta = 0
+            utcTime = datetime.utcnow().time()
+            for row in reader:
+                if zone == row[0]: 
+                    utcDelta = row[1]
+            return '{H}:{M}:{S}'.format(H = str(int(utcTime.hour) + int(utcDelta)), M = utcTime.minute, S = utcTime.second)
+
+    def analyze(self, statement):
+        for pattern, responses in psychobable:
+            match = re.match(pattern, statement)
+            if match:
+                response = random.choice(responses)
+                zone = 'Luxembourg'
+                alarm = '0 seconds'
+                for g in match.groups():
+                    if self.containsDigit(g):
+                        alarm = g
+                    else:
+                        zone = g
+                return response.format(time=self.getUTCTime(zone), location=zone, timer=alarm)
+    
+    def containsDigit(self, string):
+        for character in string:
+            if character.isdigit():
+                return True
+            return False
 
     def logChat(self, filePath, line, actor):
         # method logChat
@@ -49,7 +79,7 @@ class Eliza:
         #               actor       -> which actor said line
         with open(filePath, 'a') as file:
             file.write('\n'+actor+'\t'+line)
-            file.close()
+            # file.close()  Not need within this "with" block
 
     def run(self):
         initial = self.randInitial()        
@@ -74,10 +104,21 @@ def getTime():
     current_time = now.strftime('%H:%M:%S')
     return current_time
 
-psychobable = [
-    [r'What time(.*)\?',
-    ['The current time is: {0} in {1}',
-    ]]
+psychobable = [[r'What time is it in (.*)\?',
+     ["The current time in {location} is: {time}",
+     ]
+    ],
+    [r'What time is it ?',
+     ["The current time is: {time}"
+     ]
+    ],
+   
+    [r'Put a (.*) alarm!',
+     [
+        "Setting an {timer} alarm.",  
+        "Alarm set for {timer}",
+     ]
+    ]
 ]
 
 def main():
