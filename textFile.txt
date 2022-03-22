@@ -1,8 +1,15 @@
 initial: Hello there! How can I help you?
-initial: Hi! What seems to be the problem?
+initial: Hi! How can I be of service?
+initial: Hey, what can I do for you?
+initial: Greetings! Eliza at your service.
 final: Thank you for the lovely chat.
 final: Thank you! See you next  time!
+final: Good bye, have a nice day!
+final: Have a nice day!
+final: I hope I could be of service.
 quit: bye
 quit: goodbye
 quit: quit
+quit: ciao
+quit: see you
 quit: q
