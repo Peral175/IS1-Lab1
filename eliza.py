@@ -3,60 +3,56 @@ from datetime import datetime
 
 CHATLOG = "chatLog.txt"             # constant -> file name for chat log
 
-psychobable = [[r'What time is it in (.*)\?',
-     [
-        "The current time in {location} is: {time}.",
-     ]
-    ],
-    [r'What time is it ?',
-     [
-        "The current time is: {time}."
-     ]
-    ],
-    [r'.*time .*',
-     [
-        "The current time in {location} is: {time}."
-     ]
-    ],
-    [r'Set alarm for (.*)',
-     [
-        "Alarm set for {timer}"
-     ]
-    ],
+psychobable = [
+   [r'W|what time is it in (.*)\s?\??',
+      ["The current time in {location} is: {time}.",
+      "In {location} it is {time}."
+      ]
+   ],
 
-    [r'Set an alarm for (.*)',
-     [
-        "Alarm set for {timer}"
-     ]
-    ],
+   [r'W|what time is it\s?\??',
+      ["The current time is: {time}.",
+      "It is {time}."
+      ]
+   ],
 
-    [r'Put a (.*) alarm!',
-     [
-        "Setting an {timer} alarm.",  
+   [r'P|put a (.*) alarm\?!',
+      [
+        "Setting a {timer} alarm.",
         "Alarm set for {timer}",
-     ]
-    ],
+        "..."
+      ]
+   ],
 
-    [r'Set a (.*) alarm!',
-     [
-        "Setting a {timer} alarm.",  
+   [r'S|set a (.*) alarm\?!',
+      [
+        "Setting a {timer} alarm.",
         "Alarm set for {timer}",
-     ]
-    ],
- 
-    [r'Set .* timer (.*)',
-     [
-        "Setting a timer {timer}",  
-        "Timer set for {timer}",
-     ]
-    ],
-    [r'(.*)',
-     [
-        "Sorry I do not understand your request...",
-        "I do not know what you are asking of me...",
-        "I am unable to understand what you mean by that."
-     ]
-    ]
+        "..."
+      ]
+   ],
+
+   [r'C|can you give me the time in (.*)\?.',
+      [
+        "The time in {location} is {time}"
+      ]
+   ],
+
+   [r'A|activate a (.*) timer',
+      [
+        "Timer activated."
+      ]
+   ],
+
+   [r'(.*)',
+      [
+         "Sorry I can't help you with that."
+         "There seems to be a issue with your request."
+         "Sorry I do not understand your request...",
+         "I do not know what you are asking of me...",
+         "I am unable to understand what you mean by that."
+      ]
+   ]
 ]
 
 class Eliza:
@@ -106,6 +102,7 @@ class Eliza:
         # parameters:   self,
         #               statement   -> user input
         # returns:      responds    ->  based on psychobable
+        
         for pattern, responses in psychobable:
             match = re.match(pattern, statement)        # match user input with psychobable regex
             if match:
