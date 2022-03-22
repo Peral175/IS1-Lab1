@@ -13,41 +13,41 @@ psychobable = [[r'What time is it in (.*)\?',
         "The current time is: {time}."
      ]
     ],
-    [r'.*time.*',
+    [r'.*time .*',
      [
         "The current time in {location} is: {time}."
      ]
     ],
     [r'Set alarm for (.*)',
      [
-        "Alarm set for {timer}."
+        "Alarm set for {timer}"
      ]
     ],
 
     [r'Set an alarm for (.*)',
      [
-        "Alarm set for {timer}."
+        "Alarm set for {timer}"
      ]
     ],
 
     [r'Put a (.*) alarm!',
      [
         "Setting an {timer} alarm.",  
-        "Alarm set for {timer}.",
+        "Alarm set for {timer}",
      ]
     ],
 
     [r'Set a (.*) alarm!',
      [
         "Setting a {timer} alarm.",  
-        "Alarm set for {timer}.",
+        "Alarm set for {timer}",
      ]
     ],
  
     [r'Set .* timer (.*)',
      [
-        "Setting a timer {timer}.",  
-        "Timer set for {timer}.",
+        "Setting a timer {timer}",  
+        "Timer set for {timer}",
      ]
     ],
     [r'(.*)',
