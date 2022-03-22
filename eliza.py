@@ -172,9 +172,9 @@ def logChat(filePath, line, actor):
         file.write('\n'+actor+'\t'+line)
 
 def main():
-    eliza = Eliza()             # initialize the class with empty values
-    eliza.load('textFile.txt')  # load initials, finals and quit keywords
-    eliza.run()                 # run Eliza chatbot
+    eliza = Eliza()                     # initialize the class with empty values
+    eliza.load('initialsFinals.txt')    # load initials, finals and quit keywords
+    eliza.run()                         # run Eliza chatbot
 
 if __name__ == '__main__':
     main()
