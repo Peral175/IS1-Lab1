@@ -160,7 +160,7 @@ def getLocalTime(zone):
         for row in reader:
             if zone == row[0]:              # match first csv argument with given zone
                 utcDelta = row[1]           # extract delta from file
-        return '{H}:{M}:{S}'.format(H = str(utcTime.hour + int(utcDelta)).zfill(2), M = str(utcTime.minute).zfill(2), S = str(utcTime.second).zfill(2))  # add delta to UTC-time
+        return '{H}:{M}:{S}'.format(H = str((int(utcTime.hour) + int(utcDelta))%24).zfill(2), M = str(utcTime.minute).zfill(2), S = str(utcTime.second).zfill(2))  # add delta to UTC-time
 
 def logChat(filePath, line, actor):
     # method logChat
