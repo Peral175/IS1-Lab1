@@ -4,41 +4,45 @@ from datetime import datetime
 CHATLOG = "chatLog.txt"             # constant -> file name for chat log
 
 psychobable = [
-   [r'W|what time is it in (.*)\s?\??',
+   [r'(W|w)hat time is it in (.*)\?',
       ["The current time in {location} is: {time}.",
       "In {location} it is {time}."
       ]
    ],
 
-   [r'W|what time is it\s?\??',
+   [r'What time is it\?',
       ["The current time is: {time}.",
       "It is {time}."
       ]
    ],
 
-   [r'P|put a (.*) alarm\?!',
+   [r'(P|p)ut (an|a)\s?(.*) alarm(!|\.)',
       [
         "Setting a {timer} alarm.",
-        "Alarm set for {timer}",
-        "..."
+        "Alarm set for {timer}."
       ]
    ],
 
-   [r'S|set a (.*) alarm\?!',
+   [r'(S|s)et (an|a)\s?(.*) alarm(!|\.)',
       [
         "Setting a {timer} alarm.",
-        "Alarm set for {timer}",
-        "..."
+        "Alarm set for {timer}."
       ]
    ],
 
-   [r'C|can you give me the time in (.*)\?.',
+   [r'(S|s)et an alarm for (.*)(!|\.)',
       [
-        "The time in {location} is {time}"
+        "Alarm set for {timer}."
       ]
    ],
 
-   [r'A|activate a (.*) timer',
+   [r'(C|c)an you give me the time in (.*)\?',
+      [
+        "The time in {location} is {time}."
+      ]
+   ],
+
+   [r'(A|a)ctivate a (.*)timer(\.|!)',
       [
         "Timer activated."
       ]
@@ -46,8 +50,8 @@ psychobable = [
 
    [r'(.*)',
       [
-         "Sorry I can't help you with that."
-         "There seems to be a issue with your request."
+         "Sorry I can't help you with that.",
+         "There seems to be a issue with your request.",
          "Sorry I do not understand your request...",
          "I do not know what you are asking of me...",
          "I am unable to understand what you mean by that."
